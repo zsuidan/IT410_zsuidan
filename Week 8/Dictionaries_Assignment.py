@@ -83,13 +83,18 @@ else:
 
 #End of week 7 assignment
 # Dictionary assignment begins
+
+#Creates an empty list to hold dictionary information
 improved_employee_info = []
+
+#Loops through every employee, adding them with all their information in dictionary format to the improved_employee_info list
 i = 0 
 
 while (i < len(employee_names)):
     improved_employee_info.append({'employee_number': employee_numbers[i], 'employee_name': employee_names[i], 'employee_salary': employee_salaries[i], 
-                                   'hourly_rate': total_hourly_rate[i], 'company_raises': company_raises[i]})
+                                   'hourly_rate': round(total_hourly_rate[i], 2), 'company_raises': round(company_raises[i], 2)})
     i = i + 1
 
+#Neatly prints out each employee within the new list
 for employee in improved_employee_info:
     print(employee)
