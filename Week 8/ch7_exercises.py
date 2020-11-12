@@ -30,7 +30,7 @@ while program_running:
     dinner_items.append(dinner_item)
 
     continue_adding = input("Do you want to add another item? (Y/N): ")
-    if continue_adding == "N":
+    if continue_adding.upper() == "N":
         break
     else:
         continue
@@ -53,7 +53,7 @@ while program_running:
         print("Ride was not found.")
 
     more_rides = input("Would you like to go on another ride? (Y/N): ")
-    if more_rides == "N":
+    if more_rides.upper() == "N":
         break
     else:
         continue
@@ -64,11 +64,7 @@ print("\nProblem 7-5")
 
 grocery_list = ['milk', 'juice', 'apples', 'bread', 'cereal','apples', 'pasta', 'apples']
 
-i = 0
-
-while (i < len(grocery_list)):
-    if grocery_list[i] == "apples":
-        grocery_list.pop(i)
-    i = i + 1
+while ('apples' in grocery_list):
+    grocery_list.remove('apples')
 
 print(grocery_list)
