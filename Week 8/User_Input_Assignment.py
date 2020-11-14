@@ -5,19 +5,24 @@ while correct_info:
     #Prompts user to input their Employee ID then checks if it is composed of only numbers and the length is 7
     employee_id = input("Enter your employee ID: ")
 
-    if employee_id.isdigit() and len(employee_id) == 7:
+    if employee_id.isdigit() and len(employee_id) <= 7:
         correct_info = True
     else:
         break
     
-    #Prompts user to enter their name, if anything other than alphabetical characters and spaces are used the loop ends 
+    #Prompts user to enter their name, if any banned characters are used or nothing was entered the loop ends 
     employee_name = input("Enter your name: ")
 
-    if employee_name.replace(' ', '').isalpha():
-        correct_info = True
-    else:
+    banned_name_characters = ["!", '"', "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "=", "+", ",", "<", ">", "/", "?", ";", ":", "[", "]", "{", "}", "\\"]
+
+    for character in employee_name:
+        if character in banned_name_characters:
+            correct_info = False
+
+    if not correct_info or not employee_name:
         break
 
+    #Prompts user to enter their email, if any banned characters are used or nothing was entered the loop ends
     employee_email = input("Enter your email address: ")
 
     banned_email_characters = ["!", '"', "'", "#", "$", "%", "^", "&", "*", "(", ")", "=", "+", ",", "<", ">", "/", "?", ";", ":", "[", "]", "{", "}", "\\"]
@@ -26,7 +31,7 @@ while correct_info:
         if character in banned_email_characters:
             correct_info = False
 
-    if not correct_info:
+    if not correct_info or not employee_email:
         break
 
     #Prompts user to input their address, if the address contains any banned characters it ends the program
