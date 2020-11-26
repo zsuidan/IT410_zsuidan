@@ -13,7 +13,7 @@ class Student(Person):
 
     def showStudentInformation(self):
         """Prints out all information for a certain student"""
-        print("Name: " + self.name + " | Email: " + self.email + " | Student ID: " + self.student_id + " | Program of study: " + self.program_of_study)
+        print("Name: " + self.name.title() + " | Email: " + self.email + " | Student ID: " + self.student_id + " | Program of study: " + self.program_of_study.title())
         
 class Instructor(Person):
     """A simple class for representing an instructor"""
@@ -25,7 +25,7 @@ class Instructor(Person):
 
     def showInstructorInformation(self):
         """Prints out all information for a certain instructor"""
-        print("Name: " + self.name + " | Email: " + self.email + " | Instructor ID: " + self.instructor_id + " | Graduated from: " + self.institution_graduated_from + " | Degree earned: " + self.highest_degree_earned)
+        print("Name: " + self.name.title() + " | Email: " + self.email + " | Instructor ID: " + self.instructor_id + " | Graduated from: " + self.institution_graduated_from.title() + " | Degree earned: " + self.highest_degree_earned.title())
 
 class Validator():
     """A class for representing a list of banned characters"""
