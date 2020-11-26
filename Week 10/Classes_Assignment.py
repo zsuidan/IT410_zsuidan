@@ -11,12 +11,21 @@ class Student(Person):
         self.student_id = student_id
         self.program_of_study = program_of_study
 
+    def showStudentInformation(self):
+        """Prints out all information for a certain student"""
+        print("Name: " + self.name + " | Email: " + self.email + " | Student ID: " + self.student_id + " | Program of study: " + self.program_of_study)
+        
 class Instructor(Person):
     """A simple class for representing an instructor"""
     def __init__(self, name, email, instructor_id, institution_graduated_from, highest_degree_earned):
         super().__init__(name, email)
+        self.instructor_id = instructor_id
         self.institution_graduated_from = institution_graduated_from
         self.highest_degree_earned = highest_degree_earned
+
+    def showInstructorInformation(self):
+        """Prints out all information for a certain instructor"""
+        print("Name: " + self.name + " | Email: " + self.email + " | Instructor ID: " + self.instructor_id + " | Graduated from: " + self.institution_graduated_from + " | Degree earned: " + self.highest_degree_earned)
 
 class Validator():
     """A class for representing a list of banned characters"""
@@ -32,6 +41,14 @@ class Validator():
                 correct_characters = False
         
         return correct_characters
+
+def displayInformation(individuals):
+    """Determines the type of each object in a list and obtains information based on the type"""
+    for individual in individuals:
+        if type(individual) == Student:
+            individual.showStudentInformation()
+        elif type(individual) == Instructor:
+            individual.showInstructorInformation()
 
 program_running = True
 
@@ -146,5 +163,4 @@ while program_running:
     else:
         break
 
-for record in college_records:
-    print(record)
+displayInformation(college_records)
