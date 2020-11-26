@@ -50,9 +50,10 @@ def displayInformation(individuals):
         elif type(individual) == Instructor:
             individual.showInstructorInformation()
 
-program_running = True
-
+#Creates an empty list to store students and instructors
 college_records = []
+
+program_running = True
 
 while program_running:
 
@@ -75,24 +76,27 @@ while program_running:
     name = input("Please enter their name: ")
 
     #Checks name input to ensure it is valid, asking user to input again if not
-    name_Checker = Validator(["!", '"', "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "=", "+", ",", "<", ">", "/", "?", ";", ":", "[", "]", "{", "}", "\\"])
+    alpha_Checker = Validator(["!", '"', "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "=", "+", ",", "<", ">", "/", "?", ";", ":", "[", "]", "{", "}", "\\", 
+                               "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"])
 
-    while not name_Checker.checkCharacters(name):
+    while not alpha_Checker.checkCharacters(name) or not name:
         name = input("Name entered incorrectly. Please try again: ")
 
     #Asks user to input the email
     email = input("Please enter their email: ")
 
     #Checks email input to ensure it is valid, asking user to input again if not
-    email_Checker = Validator(["!", '"', "`", "#", "$", "%", "^", "&", "*", "(", ")", "=", "+", ",", "<", ">", "/", "?", ";", ":", "[", "]", "{", "}", "\\"])
+    email_Checker = Validator(["!", '"', "`", "#", "$", "%", "^", "&", "*", "(", ")", "=", "+", ",", "<", ">", "/", "?", ";", ":", "[", "]", "{", "}", "\\", " "])
 
-    while not email_Checker.checkCharacters(email):
+    while not email_Checker.checkCharacters(email) or not email:
         email = input("Email entered incorrectly. Please try again: ")
 
     #Asks user for either student or instructor information depending on input type entered earlier
     if input_type.lower() == "student":
+        #Asks user for a student ID
         student_id = input("Please enter the student ID: ")
 
+        #Verifies student ID, prompting user to enter again if invalid
         correct_student_id = False
         while not correct_student_id:
             if len(student_id) <= 7 and student_id.isdigit():
@@ -100,14 +104,12 @@ while program_running:
             else:
                 student_id = input("Student ID entered incorrectly. Please try again: ")
 
+        #Asks user for program of study
         program_of_study = input("Please enter the student's program of study: ")
 
-        correct_program = False
-        while not correct_program:
-            if program_of_study.isalpha():
-                correct_program = True
-            else:
-                program_of_study = input("Program of study entered incorrectly. Please try again: ")
+        #Verifies program of study, rompting user to enter again if invalid
+        while not alpha_Checker.checkCharacters(program_of_study) or not program_of_study:
+            program_of_study = input("Program of study entered incorrectly. Please try again: ")
 
         #Creates a new student using the student class
         new_student = Student(name, email, student_id, program_of_study)
@@ -116,8 +118,10 @@ while program_running:
         college_records.append(new_student)
 
     else:
+        #Asks user for an instructor ID
         instructor_id = input("Please enter the instructor ID: ")
 
+        #Verifies the instructor ID, prompting user to enter again if invalid
         correct_instructor_id = False
         while not correct_instructor_id:
             if len(instructor_id) <= 5 and instructor_id.isdigit():
@@ -125,23 +129,19 @@ while program_running:
             else:
                 instructor_id = input("Instructor ID entered incorrectly. Please try again: ")
         
+        #Asks user for the last institution the instructor graduated from
         institution_graduated_from = input("Please enter the last instutition the instructor graduated from: ")
 
-        correct_institution = False
-        while not correct_institution:
-            if institution_graduated_from.isalpha():
-                correct_institution = True
-            else:
-                institution_graduated_from = input("Institution entered incorrectly. Please try again: ")
-
+        #Verifies institution, prompting user to enter again if invalid
+        while not alpha_Checker.checkCharacters(institution_graduated_from) or not institution_graduated_from:
+            institution_graduated_from = input("Institution entered incorrectly. Please try again: ")
+        
+        #Asks user for the highest degree earned by the instructor
         highest_degree_earned = input("Please enter their highest degree earned: ")
 
-        correct_degree = False
-        while not correct_degree:
-            if highest_degree_earned.isalpha():
-                correct_degree = True
-            else:
-                highest_degree_earned = input("Degree entered incorrectly. Please try again: ")
+        #Verifies degree earned, prompting user to enter again if invalid
+        while not alpha_Checker.checkCharacters(highest_degree_earned) or not highest_degree_earned:
+            highest_degree_earned = input("Degree entered incorrectly. Please try again: ")
         
         #Creates a new instructor using the instructor class
         new_instructor = Instructor(name, email, instructor_id, institution_graduated_from, highest_degree_earned)
@@ -149,18 +149,22 @@ while program_running:
         #Adds the new instructor to the college records list
         college_records.append(new_instructor)
 
-    conitnue_adding = input("Would you like to add another? (Y/N): ")
+    #Asks user if they would like to continue adding more instructors/students
+    continue_adding = input("Would you like to add another? (Y/N): ")
 
+    #Verifies that the input is either Y or N, prompting user to enter again if not
     correct_input = False
     while not correct_input:
-        if conitnue_adding.lower() == "y" or conitnue_adding.lower() == "n":
+        if continue_adding.lower() == "y" or continue_adding.lower() == "n":
             correct_input = True
         else:
-            conitnue_adding = input("Incorrect value entered. Please enter either \"Y\" or \"N\": ")
+            continue_adding = input("Incorrect value entered. Please enter either \"Y\" or \"N\": ")
 
-    if conitnue_adding.lower() == "y":
+    #If the user entered Y, the loop continues, otherwise the loop breaks
+    if continue_adding.lower() == "y":
         continue
     else:
         break
 
+#Displays all the information for the students and instructors in the college records list
 displayInformation(college_records)
